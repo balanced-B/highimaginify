@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
-import qs from "querystring"
+import qs from "qs";
 import { twMerge } from "tailwind-merge";
 
 import { aspectRatioOptions } from "@/constants";
@@ -58,7 +58,7 @@ export const formUrlQuery = ({
 }: FormUrlQueryParams) => {
   const params = { ...qs.parse(searchParams.toString()), [key]: value };
 
-  return `${window.location.pathname}?${qs.stringify(params, {
+  return `${window.location.pathname}?${qs.stringify(params,{
     skipNulls: true,
   })}`;
 };
