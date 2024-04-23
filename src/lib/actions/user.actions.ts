@@ -20,18 +20,18 @@ export async function createUser(user: CreateUserParams) {
 
 // export async function createUser(user: CreateUserParams) {
 //   try {
-//     // Ensure database connection
+    // Ensure database connection
 //     const db = await connectToDatabase();
 //     console.log('Connected to database:', db.connection.name);
 
-//     // Create user in the database
+    // Create user in the database
 //     const newUser = await User.create(user);
 //     console.log('User created:', newUser);
 
-//     // Return the newly created user
+    // Return the newly created user
 //     return JSON.parse(JSON.stringify(newUser));
 //   } catch (error) {
-//     // Handle any errors during user creation
+    // Handle any errors during user creation
 //     console.error('Error creating user:', error);
 //     handleError(error);
 //     return null; // Optionally return null or throw an error here
