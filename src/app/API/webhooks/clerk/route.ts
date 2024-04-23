@@ -24,6 +24,7 @@ export async function POST(req: Request) {
   const svix_id = headerPayload.get("svix-id");
   const svix_timestamp = headerPayload.get("svix-timestamp");
   const svix_signature = headerPayload.get("svix-signature");
+  console.log(headerPayload, svix_id, svix_signature, svix_timestamp)
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
@@ -66,6 +67,7 @@ export async function POST(req: Request) {
   // CREATE
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
+    console.log('webhook payload:', evt.data, '<<<<<<<<')
 
     const user = {
       clerkId: id,
@@ -75,9 +77,11 @@ export async function POST(req: Request) {
       lastName: last_name ?? '',
       photo: image_url,
     };
+    console.log(user)
 
     const newUser = await createUser(user);
-
+    console.log(newUser, '<<<<<<<<<<<NEW USER')
+    
     // Set public metadata
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -86,7 +90,7 @@ export async function POST(req: Request) {
         },
       });
     }
-
+    console.log(newUser)
     return NextResponse.json({ message: "OK", user: newUser });
   }
 

@@ -13,17 +13,21 @@ export const handleError = (error: unknown) => {
   if (error instanceof Error) {
     // This is a native JavaScript error (e.g., TypeError, RangeError)
     console.error(error.message);
-    throw new Error(`Error: ${error.message}`);
+    // Rethrow the original error, not a new one
+    throw error;
   } else if (typeof error === "string") {
     // This is a string error message
     console.error(error);
+    // Wrap the string error in a new Error instance
     throw new Error(`Error: ${error}`);
   } else {
     // This is an unknown type of error
     console.error(error);
-    throw new Error(`Unknown error: ${JSON.stringify(error)}`);
+    // Convert the unknown error to a string and wrap it in a new Error instance
+    throw new Error(`Unknown error: ${String(error)}`);
   }
 };
+
 
 // PLACEHOLDER LOADER - while image is transforming
 const shimmer = (w: number, h: number) => `
